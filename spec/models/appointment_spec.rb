@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Appointment, type: :model do
   subject {
     described_class.new(
-    start_time: "13:00:00:00", 
+    start_time: "13:00:00", 
     start_date: "2018-03-02",
     duration: 120)
   }
@@ -25,4 +25,10 @@ RSpec.describe Appointment, type: :model do
       expect(subject).to_not be_valid
     end
   end
+
+  # describe "Associations" do
+  #   it { should belong_to(:client)}
+  # end
+
+
 end
