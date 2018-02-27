@@ -11,7 +11,12 @@ class Api::StylistsController < ApplicationController
     render json: @stylist
   end
 
-  def
+  def update
+    @stylist = Stylist.find(params[:id])
+    @stylist.update! (stylist_params)
+
+    render json: @stylist
+  end
 
   private
 
@@ -20,7 +25,8 @@ class Api::StylistsController < ApplicationController
       :first_name, 
       :last_name,
       :photo_url,
-      :email)
+      :email,
+      :password)
   end
 
 end
