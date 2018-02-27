@@ -22,6 +22,7 @@ stylists << Stylist.create(
   last_name: "McDonald",
   photo_url: "http://thecollectiveasalon.com/wp-content/uploads/2014/10/amanda.jpg",
   email: "alwestmcdonald@yahoo.com",
+  password: "password",
   id: 1
 )
 
@@ -30,6 +31,7 @@ stylists << Stylist.create(
   last_name: "Stills",
   photo_url: "https://static.boredpanda.com/blog/wp-content/uploads/2015/12/honest-selfie-hairstylist-ursula-goff-9.jpg",
   email: "jenniferstills@gmail.com",
+  password: "password",
   id: 2
 )
 

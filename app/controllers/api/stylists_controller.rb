@@ -11,6 +11,8 @@ class Api::StylistsController < ApplicationController
     render json: @stylist
   end
 
+  def
+
   private
 
   def stylist_params
