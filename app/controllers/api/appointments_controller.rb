@@ -7,23 +7,27 @@ def index
 end
 
   def show
-    @appointment = Appointment.find(params[:id])
+    @appointment = Appointment.where(stylist_id: params[:stylist_id]).find(params[:id])
 
     render json: @appointment
   end
 
-  # def create
-  #   @appointment = Appointment.create!(appointment_params)
+  def create
+    # @client = Client.first
+    appointment_params_plus = appointment_params
+    appointment_params_plus[:stylist_id] = params[:stylist_id]
+    # appointment_params_plus[:client_id] = @client.id
+    @appointment = Appointment.create!(appointment_params_plus)
 
-  #   render json: @appointment
-  # end
+    render json: @appointment
+  end
 
-  # def update
-  #   @appointment = Appointment.find(params[:id])
-  #   @appointment.update! (appointment_params)
+  def update
+    @appointment = Appointment.find(params[:id])
+    @appointment.update! (appointment_params)
 
-  #   render json: @appointment
-  # end
+    render json: @appointment
+  end
 
   # def destroy
   #   @appointment = Appointment.find(params[:id])
@@ -32,14 +36,15 @@ end
   #   render status: :ok
   # end
 
-  # private
+  private
 
-  # def appointment_params
-  #   params.require(:appointment).permit(
-  #     :start_, 
-  #     :last_name,
-  #     :photo_url,
-  #     :email,
-  #     :password)
-  # end
+  def appointment_params
+    params.require(:appointment).permit(
+      :start_time, 
+      :start_date,
+      :duration,
+      :comments,
+      :client_id
+)
+  end
 end
