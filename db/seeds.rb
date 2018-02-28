@@ -17,6 +17,37 @@ stylists = []
 clients = []
 appointments = []
 
+
+
+
+# amanda = Stylist.create(
+#   first_name: "Amanda",
+#   last_name: "McDonald",
+#   photo_url: "http://thecollectiveasalon.com/wp-content/uploads/2014/10/amanda.jpg",
+#   email: "alwestmcdonald@yahoo.com",
+#   password: "password",
+# )
+
+# doris = Client.create(
+#   first_name: "Doris",
+#   last_name: "Green",
+#   phone_number: "770-123-4567",
+#   formula: "Base/Redken Shades EQ equal parts 05C and 04NB; Midshaft and Ends/06CB and Dimensional Highlights/Redken Chromatics 10GI 20 volume.",
+#   notes: "Weekly shampoo and blowout",
+#   photo_url: "http://onehair.com.au/wp-content/uploads/2017/12/IMG_20171201_105520-e1513925227792.jpg",
+#   email: "jenna424@hotmail.com",
+# )
+
+# amanda.appointments.create(
+#   start_time: "15:00:00",
+#   start_date: "2018-03-01",
+#   duration: 60,
+#   comments: "Just shampoo and blowout.",
+#   client_id: 1
+# )
+
+
+
 stylists << Stylist.create(
   first_name: "Amanda",
   last_name: "McDonald",

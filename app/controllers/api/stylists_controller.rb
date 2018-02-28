@@ -18,6 +18,13 @@ class Api::StylistsController < ApplicationController
     render json: @stylist
   end
 
+  def destroy
+    @stylist = Stylist.find(params[:id])
+    @stylist.delete
+
+    render status: :ok
+  end
+
   private
 
   def stylist_params
