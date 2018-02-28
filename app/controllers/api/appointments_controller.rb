@@ -29,12 +29,12 @@ end
     render json: @appointment
   end
 
-  # def destroy
-  #   @appointment = Appointment.find(params[:id])
-  #   @appointment.delete
+  def destroy
+    @appointment = Appointment.find(params[:id])
+    @appointment.delete
 
-  #   render status: :ok
-  # end
+    render status: :ok
+  end
 
   private
 
