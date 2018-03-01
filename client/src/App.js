@@ -13,13 +13,29 @@ class App extends Component {
 
   state = {
     stylists: [],
+    appointments: []
   }
 
   componentWillMount() {
     this.fetchStylists()
+    this.fetchAppointments()
   }
 
   fetchStylists = async () => {
+    try {
+      const response = await axios.get('/api/stylists')
+      console.log("Api call should return all stylists", response.data)
+      await this.setState({ stylists: response.data })
+      return response.data
+    }
+    catch (error) {
+      console.log(error)
+      await this.setState({ error: error.message })
+      return error.message
+    }
+  }
+
+  fetchAppointments = async () => {
     try {
       const response = await axios.get('/api/stylists')
       console.log("Api call should return all stylists", response.data)
