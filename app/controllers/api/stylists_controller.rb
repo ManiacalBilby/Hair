@@ -1,4 +1,11 @@
 class Api::StylistsController < ApplicationController
+
+def index
+  @stylist = Stylist.all
+
+  render json: @stylist
+end
+
   def show
     @stylist = Stylist.find(params[:id])
 

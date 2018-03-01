@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 // import logo from './logo.svg';
 // import './App.css';
 import SplashPage from './components/SplashPage'
-import StylistPage from './components/StylistPage'
+import StylistsPage from './components/StylistsPage'
 
 
 
