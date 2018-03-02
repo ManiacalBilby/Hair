@@ -27,9 +27,9 @@ class NewAppointmentPage extends Component {
     this.createAppointment(this.state.appointment)
   }
 
-  createAppointment = (newAppointment) => {
+  createAppointment = async (newAppointment) => {
     console.log('Params', this.props)
-    axios.post(`/api/stylists/${this.props.match.params.stylist_id}/appointments`, {
+   await axios.post(`/api/stylists/${this.props.match.params.stylist_id}/appointments`, {
       appointment: newAppointment
     })
     this.setState({ redirect: true })

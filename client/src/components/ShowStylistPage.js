@@ -47,6 +47,18 @@ class ShowStylistPage extends Component {
     }
   }
 
+  deleteAppointment = (appointmentid) => {
+    console.log(appointmentid)
+    axios.delete(`/api/stylists/${this.props.match.params.id}/appointments/` + appointmentid)
+        .then((res) => {
+            console.log("Deleted!")
+            const newappointments = [...this.state.appointments]
+            const appointmentToDelete = this.state.appointments.indexOf(appointmentid)
+            newappointments.splice(appointmentToDelete, 1)
+            this.setState({ appointments: newappointments })
+        })
+}
+
   render() {
     if (this.state.error) {
       return <div>{this.state.error}</div>
@@ -55,14 +67,18 @@ class ShowStylistPage extends Component {
     return (
       <div>
         <h1>{this.state.stylist.first_name}</h1>
+
         {this.state.appointments.map(appointment => (
-          <Link key = {appointment.id} to = {`/stylists/${appointment.stylist_id}/appointments/${appointment.id}`}>
+          <div key = {appointment.id}>
+          <Link to = {`/stylists/${appointment.stylist_id}/appointments/${appointment.id}`}>
           <div key={appointment.id}>
             <div>{appointment.duration}</div>
             <div>{(appointment.start_date)}</div>
             <div>{appointment.start_time}</div>
           </div>
           </Link>
+          <button onClick={() => this.deleteAppointment(appointment.id)}>Delete</button>
+          </div>
         ))}
         <Link to = {`/stylists/${this.state.stylist.id}/appointments/new`}>New Appointment</Link>
       </div>
