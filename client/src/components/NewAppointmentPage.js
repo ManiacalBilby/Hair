@@ -1,6 +1,24 @@
 import React, { Component } from 'react';
 import axios from 'axios'
 import { Redirect } from "react-router-dom"
+import styled from 'styled-components'
+
+const FormContainer = styled.form`
+  display: flex;
+  flex-direction: column;
+`
+
+const FormFieldDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin: 5px 0;
+`
+const Input = styled.input`
+  max-width: 25%;
+  height: 25px;
+  padding-left: 5px;
+  margin-top: 3px;
+`
 
 class NewAppointmentPage extends Component {
 
@@ -45,29 +63,31 @@ class NewAppointmentPage extends Component {
       <div>
         <h1>New appointment page!</h1>
         <div>
-          <form onSubmit={this.handleNewAppointment}>
-            <div>
+          <FormContainer onSubmit={this.handleNewAppointment}>
+            <FormFieldDiv>
               <label htmlFor="start_time">Time</label>
-              <input onChange={this.handleChange} name="start_time" type="text"  value={this.state.appointment.start_time} />
-            </div>
-            <div>
+              <Input onChange={this.handleChange} name="start_time" type="text"  value={this.state.appointment.start_time} />
+            </FormFieldDiv>
+            <FormFieldDiv>
               <label htmlFor="start_date">Date</label>
-              <input onChange={this.handleChange} name="start_date" type="text"  value={this.state.appointment.start_date} />
-            </div>
-            <div>
+              <Input onChange={this.handleChange} name="start_date" type="text"  value={this.state.appointment.start_date} />
+            </FormFieldDiv>
+            <FormFieldDiv>
               <label htmlFor="duration">Duration</label>
-              <input onChange={this.handleChange} name="duration" type="text"  value={this.state.appointment.duration} />
-            </div>
-            <div>
+              <Input onChange={this.handleChange} name="duration" type="text"  value={this.state.appointment.duration} />
+            </FormFieldDiv>
+            <FormFieldDiv>
               <label htmlFor="comments">Comments</label>
-              <input onChange={this.handleChange} name="comments" type="text" value={this.state.appointment.comments} />
-            </div>
-            <div>
+              <Input onChange={this.handleChange} name="comments" type="text" value={this.state.appointment.comments} />
+            </FormFieldDiv>
+            <FormFieldDiv>
               <label htmlFor="client_id">Client Id</label>
-              <input onChange={this.handleChange} name="client_id" type="text" value={this.state.appointment.client_id} />
-            </div>
+              <Input onChange={this.handleChange} name="client_id" type="text" value={this.state.appointment.client_id} />
+            </FormFieldDiv>
+            <div>
             <button>Add New Appointment</button>
-          </form>
+            </div>
+          </FormContainer>
         </div>
       </div>
     );
