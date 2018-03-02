@@ -1,6 +1,7 @@
 
 import React, { Component } from 'react'
 import axios from 'axios'
+import { Redirect } from "react-router-dom"
 // import { Link } from 'react-router-dom'
 
 class EditAppointmentPage extends Component {
@@ -53,12 +54,18 @@ class EditAppointmentPage extends Component {
         try {
             console.log(this.state.appointment.id)
             await axios.patch(`/api/stylists/${this.props.match.params.stylist_id}/appointments/${this.props.match.params.id}`, this.state.appointment)
+            this.setState({redirect: true})
         } catch (error) {
             console.log(error)
         }
     }
 
     render() {
+      if (this.state.redirect) {
+        return (
+          <Redirect to={`/stylists/${this.props.match.params.stylist_id}`} />
+        );
+      }
         console.log(this.state.appointment)
         console.log(this.state.appointment.id)
         return (
