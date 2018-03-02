@@ -22,21 +22,21 @@ class EditAppointmentPage extends Component {
     }
 
     getAppointment = async () => {
-      try{
-        console.log("State appointment:", this.state.appointment)
-        // console.log("param ID:", this.props.match.params.id)
-      const response = await axios.get(`/api/stylists/${this.props.match.params.stylist_id}/appointments/${this.props.match.params.id}`)
-      console.log("Response from API:", response.data)
-      return response.data
-      }
-      catch (error) {
-        console.log(error)
-      }
-            // .then(res => {
-            //     // this.setState({ appointment: res.data })
-            //     return res.data
-            //     console.log("appointment in state:", this.state.appointment)
-            // })
+        try {
+            console.log("State appointment:", this.state.appointment)
+            // console.log("param ID:", this.props.match.params.id)
+            const response = await axios.get(`/api/stylists/${this.props.match.params.stylist_id}/appointments/${this.props.match.params.id}`)
+            console.log("Response from API:", response.data)
+            return response.data
+        }
+        catch (error) {
+            console.log(error)
+        }
+        // .then(res => {
+        //     // this.setState({ appointment: res.data })
+        //     return res.data
+        //     console.log("appointment in state:", this.state.appointment)
+        // })
     }
 
     handleChange = (event) => {
@@ -54,18 +54,18 @@ class EditAppointmentPage extends Component {
         try {
             console.log(this.state.appointment.id)
             await axios.patch(`/api/stylists/${this.props.match.params.stylist_id}/appointments/${this.props.match.params.id}`, this.state.appointment)
-            this.setState({redirect: true})
+            this.setState({ redirect: true })
         } catch (error) {
             console.log(error)
         }
     }
 
     render() {
-      if (this.state.redirect) {
-        return (
-          <Redirect to={`/stylists/${this.props.match.params.stylist_id}`} />
-        );
-      }
+        if (this.state.redirect) {
+            return (
+                <Redirect to={`/stylists/${this.props.match.params.stylist_id}`} />
+            );
+        }
         console.log(this.state.appointment)
         console.log(this.state.appointment.id)
         return (
@@ -92,7 +92,6 @@ class EditAppointmentPage extends Component {
                         <button>Update Appointment</button>
                     </form>
                 </div>
-                {/* <Link to={`/users/${this.state.user._id}`}>Return to User</Link> */}
             </div>
         )
     }
