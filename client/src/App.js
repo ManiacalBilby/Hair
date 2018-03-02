@@ -7,6 +7,7 @@ import SplashPage from './components/SplashPage'
 import StylistsPage from './components/StylistsPage'
 import ShowStylistPage from './components/ShowStylistPage'
 import EditAppointmentPage from './components/EditAppointmentPage'
+import NewAppointmentPage from './components/NewAppointmentPage'
 
 
 
@@ -23,7 +24,7 @@ class App extends Component {
   fetchStylists = async () => {
     try {
       const response = await axios.get('/api/stylists')
-      console.log("Api call should return all stylists", response.data)
+      // console.log("Api call should return all stylists", response.data)
       await this.setState({ stylists: response.data })
       return response.data
     }
@@ -41,6 +42,7 @@ class App extends Component {
     const StylistsPageComponent = () => (<StylistsPage stylists = {this.state.stylists} />)
     const ShowStylistPageComponent = (props) => (<ShowStylistPage {...props} stylists = {this.state.stylists} />)
     const EditAppointmentpageComponent = (props) => (<EditAppointmentPage {...props}/>)
+    const NewAppointmentPageComponent = (props) => (<NewAppointmentPage {...props}/>)
     
     return (
       <Router>
@@ -49,6 +51,7 @@ class App extends Component {
             <Route exact path="/" component={SplashPage} />
             <Route exact path="/stylists" component={StylistsPageComponent} />
             <Route exact path="/stylists/:id" component={ShowStylistPageComponent} />
+            <Route exact path="/stylists/:stylist_id/appointments/new" component={NewAppointmentPageComponent} />
             <Route exact path="/stylists/:stylist_id/appointments/:id" component={EditAppointmentpageComponent} />
           </Switch>
         </div>

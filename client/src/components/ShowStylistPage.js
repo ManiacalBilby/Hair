@@ -64,7 +64,7 @@ class ShowStylistPage extends Component {
           </div>
           </Link>
         ))}
-        <Link to = {`/stylists/${this.state.stylist.id}/appointments/`}>New Appointment</Link>
+        <Link to = {`/stylists/${this.state.stylist.id}/appointments/new`}>New Appointment</Link>
       </div>
     );
   }

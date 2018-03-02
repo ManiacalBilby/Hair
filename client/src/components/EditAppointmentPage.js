@@ -23,7 +23,7 @@ class EditAppointmentPage extends Component {
 
     getAppointment = async () => {
         try {
-            console.log("State appointment:", this.state.appointment)
+            // console.log("State appointment:", this.state.appointment)
             // console.log("param ID:", this.props.match.params.id)
             const response = await axios.get(`/api/stylists/${this.props.match.params.stylist_id}/appointments/${this.props.match.params.id}`)
             console.log("Response from API:", response.data)
@@ -67,7 +67,7 @@ class EditAppointmentPage extends Component {
             );
         }
         console.log(this.state.appointment)
-        console.log(this.state.appointment.id)
+        // console.log(this.state.appointment.id)
         return (
             <div>
                 <h1>Edit Appointment</h1>
