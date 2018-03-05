@@ -82,7 +82,7 @@ render() {
           <Link to={`/stylists/${appointment.stylist_id}/appointments/${appointment.id}`}>
             <div key={appointment.id}>
               <div>{appointment.duration}</div>
-              <div>{(appointment.start_date)}</div>
+              <div>{appointment.start_date}</div>
               <div>{appointment.start_time}</div>
             </div>
           </Link>

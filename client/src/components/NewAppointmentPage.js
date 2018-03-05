@@ -24,8 +24,8 @@ class NewAppointmentPage extends Component {
 
   state = {
     appointment: {
-      start_time: '',
-      start_date: '',
+      start_time: new Date().toLocaleTimeString(),
+      start_date: new Date().toLocaleDateString(),
       duration: 0,
       comments: '',
       client_id: 0
