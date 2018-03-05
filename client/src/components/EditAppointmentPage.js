@@ -49,11 +49,6 @@ class EditAppointmentPage extends Component {
     catch (error) {
       console.log(error)
     }
-    // .then(res => {
-    //     // this.setState({ appointment: res.data })
-    //     return res.data
-    //     console.log("appointment in state:", this.state.appointment)
-    // })
   }
 
   handleChange = (event) => {

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 class ShowStylistPage extends Component {
 
@@ -47,43 +47,52 @@ class ShowStylistPage extends Component {
     }
   }
 
-  deleteAppointment = (appointmentid) => {
-    console.log(appointmentid)
-    axios.delete(`/api/stylists/${this.props.match.params.id}/appointments/` + appointmentid)
-        .then((res) => {
-            console.log("Deleted!")
-            const newappointments = [...this.state.appointments]
-            const appointmentToDelete = this.state.appointments.indexOf(appointmentid)
-            newappointments.splice(appointmentToDelete, 1)
-            this.setState({ appointments: newappointments })
-        })
+  deleteAppointment = async (appointmentid) => {
+    try {
+      console.log(appointmentid)
+      await axios.delete(`/api/stylists/${this.props.match.params.id}/appointments/` + appointmentid)
+      this.componentWillMount()
+      // // .then((res) => {
+      // console.log("Deleted!")
+      // const newappointments = [...this.state.appointments]
+      // const appointmentToDelete = this.state.appointments.indexOf(appointmentid)
+      // newappointments.splice(appointmentToDelete)
+      // this.setState({ appointments: newappointments })
+
+    }
+  catch(error) {
+    console.log(error)
+    await this.setState({ error: error.message })
+    return error.message
+  }
 }
 
-  render() {
-    if (this.state.error) {
-      return <div>{this.state.error}</div>
-    }
-    console.log("Stylist in state", this.state.stylist)
-    return (
-      <div>
-        <h1>{this.state.stylist.first_name}</h1>
+render() {
+  if (this.state.error) {
+    return <div>{this.state.error}</div>
+  }
+  console.log("Stylist in state", this.state.stylist)
+  console.log("Appointments in state", this.state.appointments)
+  return (
+    <div>
+      <h1>{this.state.stylist.first_name}</h1>
 
-        {this.state.appointments.map(appointment => (
-          <div key = {appointment.id}>
-          <Link to = {`/stylists/${appointment.stylist_id}/appointments/${appointment.id}`}>
-          <div key={appointment.id}>
-            <div>{appointment.duration}</div>
-            <div>{(appointment.start_date)}</div>
-            <div>{appointment.start_time}</div>
-          </div>
+      {this.state.appointments.map(appointment => (
+        <div key={appointment.id}>
+          <Link to={`/stylists/${appointment.stylist_id}/appointments/${appointment.id}`}>
+            <div key={appointment.id}>
+              <div>{appointment.duration}</div>
+              <div>{(appointment.start_date)}</div>
+              <div>{appointment.start_time}</div>
+            </div>
           </Link>
           <button onClick={() => this.deleteAppointment(appointment.id)}>Delete</button>
-          </div>
-        ))}
-        <Link to = {`/stylists/${this.state.stylist.id}/appointments/new`}>New Appointment</Link>
-      </div>
-    );
-  }
+        </div>
+      ))}
+      <Link to={`/stylists/${this.state.stylist.id}/appointments/new`}>New Appointment</Link>
+    </div>
+  );
+}
 }
 
 export default ShowStylistPage;
