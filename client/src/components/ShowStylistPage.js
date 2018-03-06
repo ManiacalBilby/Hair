@@ -11,6 +11,7 @@ align-items: center;
 justify-content: space-around;
 align-content: center;
 flex-wrap: wrap;
+background-color: whitesmoke;
 `
 
 const AppointmentContainer = styled.div`
@@ -24,8 +25,9 @@ const AppointmentContainer = styled.div`
   justify-content: center;
   background-size: cover;
   background-position: center;
+  border-radius: 5%;
   &:hover {
-    filter: blur(1px);
+    box-shadow: 6px 9px 14px 10px rgba(201,197,201,1);
   };
   /* background-attachment: fixed; */
   @media (min-width: 768px) {
