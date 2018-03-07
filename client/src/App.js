@@ -4,6 +4,7 @@ import axios from 'axios'
 // import logo from './logo.svg';
 // import './App.css';
 import SplashPage from './components/SplashPage'
+import NavBar from './components/NavBar'
 import StylistsPage from './components/StylistsPage'
 import ShowStylistPage from './components/ShowStylistPage'
 import StylistAppointmentsPage from './components/StylistAppointmentsPage'
@@ -45,11 +46,13 @@ class App extends Component {
     const StylistAppointmentsPageComponent = (props) => (<StylistAppointmentsPage {...props} stylists = {this.state.stylists} />)
     const EditAppointmentpageComponent = (props) => (<EditAppointmentPage {...props}/>)
     const NewAppointmentPageComponent = (props) => (<NewAppointmentPage {...props}/>)
+    const NavBarComponent = (props) => (<NavBar {...props}/>)
 
     
     return (
       <Router>
         <div>
+        <Route path="/stylists" component={NavBarComponent} />  
           <Switch>
             <Route exact path="/" component={SplashPage} />
             <Route exact path="/stylists" component={StylistsPageComponent} />
