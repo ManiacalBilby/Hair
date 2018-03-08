@@ -1,7 +1,7 @@
 class Api::AppointmentsController < ApplicationController
 
 def index
-  @appointments = Appointment.where(stylist_id: params[:stylist_id])
+  @appointments = Appointment.where(["stylist_id = ?  and start_date >= ?", params[:stylist_id], Date.today])
 
   render json: @appointments
 end

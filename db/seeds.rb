@@ -63,7 +63,7 @@ Appointment.create(
   stylist: amanda, 
   client: doris, 
   start_time: "15:00:00",
-  start_date: "2018-03-01",
+  start_date: "2018-08-01",
   duration: 60,
   comments: "Just shampoo and blowout."
 )
@@ -72,7 +72,7 @@ Appointment.create(
   stylist: amanda, 
   client: doris, 
   start_time: "15:00:00",
-  start_date: "2018-03-08",
+  start_date: "2018-08-08",
   duration: 120,
   comments: "Cut and color",
 )
@@ -81,7 +81,7 @@ Appointment.create(
   stylist: jennifer,
   client: samantha,
   start_time: "19:00:00",
-  start_date: "2018-03-22",
+  start_date: "2018-08-22",
   duration: 80,
   comments: "Trim and touch up roots",
 )
@@ -90,7 +90,7 @@ Appointment.create(
   stylist: jennifer,
   client: karen,
   start_time: "08:00:00",
-  start_date: "2018-03-13",
+  start_date: "2018-08-13",
   duration: 120,
   comments: "Cut and color(red)"
 )
