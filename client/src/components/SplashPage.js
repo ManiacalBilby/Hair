@@ -48,7 +48,7 @@ class SplashPage extends Component {
           <SplashTitle>
             <h1>Hair Appointment Integration Record</h1>
           </SplashTitle>
-          <Form action="">
+          {/* <Form action="">
 
             <label htmlFor="">Email</label>
             <input type="text" />
@@ -56,7 +56,7 @@ class SplashPage extends Component {
             <label htmlFor="">Password</label>
             <input type="text" />
 
-          </Form>
+          </Form> */}
           <StylistLink to={"/stylists"}>Continue to existing users</StylistLink>
         </Content>
       </Container>

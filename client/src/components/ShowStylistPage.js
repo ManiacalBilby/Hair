@@ -67,11 +67,11 @@ class ShowStylistPage extends Component {
           </Content>
           </AppointmentContainer>
         </StyledLink>
-        <ClientContainer>
+        {/* <ClientContainer>
           <Content>
             Clients
           </Content>
-        </ClientContainer>
+        </ClientContainer> */}
       </Wrapper>
     );
   }
