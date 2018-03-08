@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import { Redirect } from "react-router-dom"
 import styled from 'styled-components'
+import moment from 'moment'
 
 const FormContainer = styled.form`
   display: flex;
@@ -87,11 +88,11 @@ class EditAppointmentPage extends Component {
           <FormContainer onSubmit={this.handleEdit}>
             <FormFieldDiv>
               <label htmlFor="start_time">Time</label>
-              <Input onChange={this.handleChange} name="start_time" type="text" value={this.state.appointment.start_time} />
+              <Input onChange={this.handleChange} name="start_time" type="text" value={moment(this.state.appointment.start_time).format('hh:mm a')} />
             </FormFieldDiv>
             <FormFieldDiv>
               <label htmlFor="start_date">Date</label>
-              <Input onChange={this.handleChange} name="start_date" type="text" value={this.state.appointment.start_date} />
+              <Input onChange={this.handleChange} name="start_date" type="text" value={moment(this.state.appointment.start_date).format('DD MMM YYYY')} />
             </FormFieldDiv>
             <FormFieldDiv>
               <label htmlFor="duration">Duration</label>

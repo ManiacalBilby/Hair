@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios'
 import { Link } from 'react-router-dom'
+import moment from 'moment'
 
 class StylistAppointmentsPage extends Component {
 
@@ -82,8 +83,8 @@ render() {
           <Link to={`/stylists/${appointment.stylist_id}/appointments/${appointment.id}`}>
             <div key={appointment.id}>
               <div>{appointment.duration}</div>
-              <div>{appointment.start_date}</div>
-              <div>{appointment.start_time}</div>
+              <div>{moment(appointment.start_date).format('DD MMM YYYY')}</div>
+              <div>{moment(appointment.start_time).format('hh:mm a')}</div>
             </div>
           </Link>
           <button onClick={() => this.deleteAppointment(appointment.id)}>Delete</button>

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios'
 import { Redirect } from "react-router-dom"
 import styled from 'styled-components'
+import moment from 'moment'
 
 const FormContainer = styled.form`
   display: flex;
@@ -24,8 +25,8 @@ class NewAppointmentPage extends Component {
 
   state = {
     appointment: {
-      start_time: new Date().toLocaleTimeString(),
-      start_date: new Date().toLocaleDateString(),
+      start_time: moment(new Date()).format('hh:mm a'),
+      start_date: moment(new Date()).format('DD MMM YYYY'),
       duration: 0,
       comments: '',
       client_id: 0
