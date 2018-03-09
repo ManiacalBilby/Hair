@@ -48,8 +48,15 @@ class NewAppointmentPage extends Component {
 
   createAppointment = async (newAppointment) => {
     console.log('Params', this.props)
+    console.log('Converted time', moment(newAppointment.start_time, "hh:mm a").utc().format("hh:mm a"))
    await axios.post(`/api/stylists/${this.props.match.params.stylist_id}/appointments`, {
-      appointment: newAppointment
+      appointment: {
+        start_time: moment(newAppointment.start_time, "hh:mm a").utc().format("hh:mm a"),
+        start_date: newAppointment.start_date,
+        duration: newAppointment.duration,
+        comments: newAppointment.comments,
+        client_id: newAppointment.client_id
+      }
     })
     this.setState({ redirect: true })
   }
