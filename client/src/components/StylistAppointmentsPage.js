@@ -24,6 +24,12 @@ const AllAppointmentsContainer = styled.div`
   align-content: center;
   /* flex-wrap: wrap; */
   width: 75%;
+  @media (min-width: 675px) {
+    width: 50%;
+  };
+  @media (min-width: 1000px) {
+    width: 40%;
+  };
 `
 const StyledLink = styled(Link)`
   display: flex;
