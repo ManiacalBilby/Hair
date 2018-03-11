@@ -5,7 +5,7 @@ import moment from 'moment'
 import styled from 'styled-components'
 
 const Wrapper = styled.div`
-  height: 100vh;
+  height: 90vh;
   width: 100vw;
   display: flex;
   flex-direction: column;
@@ -18,11 +18,9 @@ const Wrapper = styled.div`
 
 const AllAppointmentsContainer = styled.div`
   display: flex;
-  /* flex-direction: column; */
   align-items: center;
   justify-content: center;
   align-content: center;
-  /* flex-wrap: wrap; */
   width: 75%;
   @media (min-width: 675px) {
     width: 50%;
@@ -125,7 +123,7 @@ render() {
             <AppointmentContainer key={appointment.id}>
               <div>{`${appointment.duration} min.`}</div>
               <div>{moment(appointment.start_date).format('MMM DD YYYY')}</div>
-              <div>{moment(appointment.start_time).format('hh:mm a')}</div>
+              <div>{moment(appointment.start_time).add(1, 'h').format("LT")}</div>
             </AppointmentContainer>
           </StyledLink>
           <button onClick={() => this.deleteAppointment(appointment.id)}>Delete</button>

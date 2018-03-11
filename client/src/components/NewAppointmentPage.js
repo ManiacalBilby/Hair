@@ -29,7 +29,7 @@ class NewAppointmentPage extends Component {
       start_date: moment(new Date()).format('DD MMM YYYY'),
       duration: 0,
       comments: '',
-      client_id: 0
+      client_id: 1
     },
     redirect: false
   }
@@ -64,7 +64,7 @@ class NewAppointmentPage extends Component {
   render() {
     if (this.state.redirect) {
       return (
-          <Redirect to={`/stylists/${this.props.match.params.stylist_id}`} />
+          <Redirect to={`/stylists/${this.props.match.params.stylist_id}/appointments`} />
       );
   }
     return (
