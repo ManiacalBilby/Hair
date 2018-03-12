@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 
 const StyledNavBar = styled.div`
   display: flex;
@@ -14,21 +15,28 @@ const Logo = styled.div`
   margin-left: 10px;
   font-family: 'Dr Sugiyama', cursive;
 `
-const UserPic = styled.img`
-  width: 75px;
-  height: 75px;
+// const UserPic = styled.img`
+//   width: 75px;
+//   height: 75px;
+// `
+
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: black;
 `
 
 class NavBar extends Component {
   render() {
     return (
       <StyledNavBar>
+        <StyledLink to="/">
         <Logo>
           Hair
         </Logo>
-        <div>
+        </StyledLink>
+        {/* <div>
           <UserPic src="http://www.freeiconspng.com/uploads/profile-icon-9.png" alt="profile placeholder" />
-        </div>
+        </div> */}
       </StyledNavBar>
     );
   }
