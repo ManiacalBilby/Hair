@@ -132,11 +132,10 @@ class EditAppointmentPage extends Component {
               <label htmlFor="comments">Comments</label>
               <TextArea onChange={this.handleChange} name="comments" type="text" value={this.state.appointment.comments} />
             </FormFieldDiv>
-
-          </FormContainer>
-        </div>
-        <div>
+            <div>
           <button>Update Appointment</button>
+        </div>
+          </FormContainer>
         </div>
       </Wrapper>
     )
