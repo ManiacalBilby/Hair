@@ -8,6 +8,12 @@ import TimePicker from 'rc-time-picker'
 
 const showSecond = false
 
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`
+
 const FormContainer = styled.form`
   display: flex;
   flex-direction: column;
@@ -19,10 +25,14 @@ const FormFieldDiv = styled.div`
   margin: 5px 0;
 `
 const Input = styled.input`
-  max-width: 25%;
   height: 25px;
   padding-left: 5px;
   margin-top: 3px;
+`
+
+const TextArea = styled.textarea`
+  height: 50px;
+  width: 200px;
 `
 
 class EditAppointmentPage extends Component {
@@ -95,8 +105,8 @@ class EditAppointmentPage extends Component {
     console.log("Appointment in state", this.state.appointment)
 
     return (
-      <div>
-        <h1>Edit Appointment</h1>
+      <Wrapper>
+        <h2>Edit Appointment</h2>
         <div>
           <FormContainer onSubmit={this.handleEdit}>
             <FormFieldDiv>
@@ -120,14 +130,15 @@ class EditAppointmentPage extends Component {
             </FormFieldDiv>
             <FormFieldDiv>
               <label htmlFor="comments">Comments</label>
-              <Input onChange={this.handleChange} name="comments" type="text" value={this.state.appointment.comments} />
+              <TextArea onChange={this.handleChange} name="comments" type="text" value={this.state.appointment.comments} />
             </FormFieldDiv>
-            <div>
-              <button>Update Appointment</button>
-            </div>
+
           </FormContainer>
         </div>
-      </div>
+        <div>
+          <button>Update Appointment</button>
+        </div>
+      </Wrapper>
     )
   }
 }
