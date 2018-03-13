@@ -1,9 +1,10 @@
-
+import 'rc-time-picker/assets/index.css'
 import React, { Component } from 'react'
 import axios from 'axios'
 import { Redirect } from "react-router-dom"
 import styled from 'styled-components'
 import moment from 'moment'
+import TimePicker from 'rc-time-picker'
 
 const FormContainer = styled.form`
   display: flex;
@@ -26,7 +27,7 @@ class EditAppointmentPage extends Component {
 
   state = {
     appointment: {
-      start_time: '',
+      start_time: moment(),
       start_date: '',
       duration: 0,
       comments: ''
@@ -36,6 +37,7 @@ class EditAppointmentPage extends Component {
 
   componentWillMount = async () => {
     const appointment = await this.getAppointment()
+    appointment.start_time = moment(appointment.start_time).add(1, 'h')
     await this.setState({ appointment })
   }
 
@@ -58,6 +60,17 @@ class EditAppointmentPage extends Component {
     this.setState({ appointment })
   }
 
+  handleTimeChange = (value) => {
+    console.log(value)
+    console.log("Appointment start time",this.state.appointment.start_time)
+
+    const appointment_time = {...this.state.appointment}
+    appointment_time.start_time = value
+    // const appointment_time = value
+    this.setState({appointment:appointment_time})
+
+  }
+
   handleEdit = (event) => {
     event.preventDefault()
     this.updateAppointment()
@@ -66,7 +79,9 @@ class EditAppointmentPage extends Component {
   updateAppointment = async (userid) => {
     try {
       console.log(this.state.appointment.id)
-      await axios.patch(`/api/stylists/${this.props.match.params.stylist_id}/appointments/${this.props.match.params.id}`, this.state.appointment)
+      const payload = {...this.state.appointment}
+      payload.start_time = payload.start_time.subtract(1, 'h').utc()
+      await axios.patch(`/api/stylists/${this.props.match.params.stylist_id}/appointments/${this.props.match.params.id}`, payload)
       this.setState({ redirect: true })
     } catch (error) {
       console.log(error)
@@ -76,10 +91,10 @@ class EditAppointmentPage extends Component {
   render() {
     if (this.state.redirect) {
       return (
-        <Redirect to={`/stylists/${this.props.match.params.stylist_id}`} />
+        <Redirect to={`/stylists/${this.props.match.params.stylist_id}/appointments`} />
       );
     }
-    console.log(this.state.appointment)
+    console.log("Appointment in state" ,this.state.appointment)
     // console.log(this.state.appointment.id)
     return (
       <div>
@@ -88,7 +103,15 @@ class EditAppointmentPage extends Component {
           <FormContainer onSubmit={this.handleEdit}>
             <FormFieldDiv>
               <label htmlFor="start_time">Time</label>
-              <Input onChange={this.handleChange} name="start_time" type="text" value={moment(this.state.appointment.start_time).add(1, 'h').format('hh:mm a')} />
+              <TimePicker 
+                onChange={this.handleTimeChange} 
+                name="start_time" 
+                format='hh:mm a'
+                value={this.state.appointment.start_time}
+                use12Hours= "true"
+                showSecond="false"
+                // value={moment().add(1, 'h')} 
+              />
             </FormFieldDiv>
             <FormFieldDiv>
               <label htmlFor="start_date">Date</label>
