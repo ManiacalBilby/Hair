@@ -88,7 +88,7 @@ class EditAppointmentPage extends Component {
           <FormContainer onSubmit={this.handleEdit}>
             <FormFieldDiv>
               <label htmlFor="start_time">Time</label>
-              <Input onChange={this.handleChange} name="start_time" type="text" value={moment(this.state.appointment.start_time).format('hh:mm a')} />
+              <Input onChange={this.handleChange} name="start_time" type="text" value={moment(this.state.appointment.start_time).add(1, 'h').format('hh:mm a')} />
             </FormFieldDiv>
             <FormFieldDiv>
               <label htmlFor="start_date">Date</label>
