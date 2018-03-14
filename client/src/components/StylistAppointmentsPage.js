@@ -40,6 +40,7 @@ const AppointmentContainer = styled.div`
   display: flex;
   width: 100%;
   justify-content: space-around;
+  color: teal;
 `
 
 class StylistAppointmentsPage extends Component {
