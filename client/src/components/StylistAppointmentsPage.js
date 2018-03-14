@@ -35,6 +35,11 @@ const StyledLink = styled(Link)`
   text-decoration: none;
   width: 100%;
 `
+const StyledNewAppointmentLink = styled(Link)`
+  text-decoration: none;
+  color: black;
+  font-size: 1.25rem;
+`
 
 const AppointmentContainer = styled.div`
   display: flex;
@@ -130,7 +135,7 @@ render() {
           <button onClick={() => this.deleteAppointment(appointment.id)}>Delete</button>
         </AllAppointmentsContainer>
       ))}
-      <Link to={`/stylists/${this.state.stylist.id}/appointments/new`}>New Appointment</Link>
+      <StyledNewAppointmentLink to={`/stylists/${this.state.stylist.id}/appointments/new`}>Add New Appointment</StyledNewAppointmentLink>
     </Wrapper>
   );
 }
