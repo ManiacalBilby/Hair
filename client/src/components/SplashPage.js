@@ -25,11 +25,29 @@ const Content = styled.div`
 
 const SplashTitle = styled.div`
   text-align: center;
+  text-shadow: rgb(7, 7, 7) 2px 2px 5px;
+  @media (min-width: 705px) {
+    font-size: 1.25rem;
+  };
+  @media (min-width: 1000px) {
+    font-size: 1.5rem;
+  };
 `
 
 const StylistLink = styled(Link)`
   text-decoration: none;
-  color: white;
+  color: ghostwhite;
+  text-shadow: rgb(7, 7, 7) 0 0 10px;
+  &:hover {
+    text-shadow: rgb(150, 150, 150) 2px 2px 10px;
+    color: white;
+  };
+  @media (min-width: 675px) {
+    font-size: 1.25rem;
+  };
+  @media (min-width: 1000px) {
+    font-size: 1.5rem;
+  };
 `
 
 class SplashPage extends Component {
