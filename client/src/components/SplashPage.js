@@ -24,15 +24,7 @@ const Content = styled.div`
 `
 
 const SplashTitle = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center; 
-  align-items: center;
-`
-
-const Form = styled.form`
-  display: flex;
-  flex-direction: column;
+  text-align: center;
 `
 
 const StylistLink = styled(Link)`
