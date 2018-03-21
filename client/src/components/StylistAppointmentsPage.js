@@ -39,6 +39,10 @@ const StyledNewAppointmentLink = styled(Link)`
   text-decoration: none;
   color: black;
   font-size: 1.25rem;
+  &:hover {
+    text-shadow: rgb(150, 150, 150) 1px 1px 2px;
+    color: teal;
+  };
 `
 
 const AppointmentContainer = styled.div`
