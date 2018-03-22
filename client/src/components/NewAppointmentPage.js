@@ -3,6 +3,10 @@ import axios from 'axios'
 import { Redirect } from "react-router-dom"
 import styled from 'styled-components'
 import moment from 'moment'
+import TimePicker from 'rc-time-picker'
+import 'rc-time-picker/assets/index.css'
+
+const showSecond = false
 
 const Wrapper = styled.div`
   display: flex;
@@ -36,7 +40,7 @@ class NewAppointmentPage extends Component {
 
   state = {
     appointment: {
-      start_time: moment(new Date()).format('hh:mm a'),
+      start_time: moment(),
       start_date: moment(new Date()).format('DD MMM YYYY'),
       duration: 0,
       comments: '',
@@ -49,6 +53,15 @@ class NewAppointmentPage extends Component {
     const appointment = { ...this.state.appointment }
     appointment[event.target.name] = event.target.value
     this.setState({ appointment })
+  }
+
+  handleTimeChange = (value) => {
+
+    const appointment_time = { ...this.state.appointment }
+    appointment_time.start_time = value
+
+    this.setState({ appointment: appointment_time })
+
   }
 
   handleNewAppointment = (event) => {
@@ -85,7 +98,15 @@ class NewAppointmentPage extends Component {
           <FormContainer onSubmit={this.handleNewAppointment}>
             <FormFieldDiv>
               <label htmlFor="start_time">Time</label>
-              <Input onChange={this.handleChange} name="start_time" type="text" value={this.state.appointment.start_time} />
+              <TimePicker
+                onChange={this.handleTimeChange}
+                name="start_time"
+                format='hh:mm a'
+                value={this.state.appointment.start_time}
+                showSecond={showSecond}
+                use12Hours
+              />
+              {/* <Input onChange={this.handleChange} name="start_time" type="text" value={this.state.appointment.start_time} /> */}
             </FormFieldDiv>
             <FormFieldDiv>
               <label htmlFor="start_date">Date</label>
