@@ -1,8 +1,11 @@
 import 'rc-time-picker/assets/index.css'
 import React, { Component } from 'react'
 import axios from 'axios'
-import { Redirect } from "react-router-dom"
+import { Redirect } from 'react-router-dom'
 import styled from 'styled-components'
+/* eslint-disable import/no-extraneous-dependencies */
+import PropTypes from 'prop-types'
+/* eslint-enable import/no-extraneous-dependencies */
 import moment from 'moment'
 import TimePicker from 'rc-time-picker'
 
@@ -36,15 +39,14 @@ const TextArea = styled.textarea`
 `
 
 class EditAppointmentPage extends Component {
-
   state = {
     appointment: {
       start_time: moment(),
       start_date: '',
       duration: 0,
-      comments: ''
+      comments: '',
     },
-    redirect: false
+    redirect: false,
   }
 
   componentWillMount = async () => {
@@ -56,11 +58,10 @@ class EditAppointmentPage extends Component {
   getAppointment = async () => {
     try {
       const response = await axios.get(`/api/stylists/${this.props.match.params.stylist_id}/appointments/${this.props.match.params.id}`)
-      console.log("Response from API:", response.data)
       return response.data
-    }
-    catch (error) {
-      console.log(error)
+    } catch (error) {
+      /* eslint no-console: ["error", { allow: ["warn", "error"] }] */
+      return console.error(error)
     }
   }
 
@@ -71,12 +72,10 @@ class EditAppointmentPage extends Component {
   }
 
   handleTimeChange = (value) => {
+    const appointmentTime = { ...this.state.appointment }
+    appointmentTime.start_time = value
 
-    const appointment_time = { ...this.state.appointment }
-    appointment_time.start_time = value
-
-    this.setState({ appointment: appointment_time })
-
+    this.setState({ appointment: appointmentTime })
   }
 
   handleEdit = (event) => {
@@ -84,15 +83,15 @@ class EditAppointmentPage extends Component {
     this.updateAppointment()
   }
 
-  updateAppointment = async (userid) => {
+  updateAppointment = async () => {
     try {
-
       const payload = { ...this.state.appointment }
       payload.start_time = payload.start_time.subtract(1, 'h').utc()
       await axios.patch(`/api/stylists/${this.props.match.params.stylist_id}/appointments/${this.props.match.params.id}`, payload)
       this.setState({ redirect: true })
     } catch (error) {
-      console.log(error)
+      /* eslint no-console: ["error", { allow: ["warn", "error"] }] */
+      console.error(error)
     }
   }
 
@@ -102,7 +101,7 @@ class EditAppointmentPage extends Component {
         <Redirect to={`/stylists/${this.props.match.params.stylist_id}/appointments`} />
       );
     }
-    console.log("Appointment in state", this.state.appointment)
+    // console.log('Appointment in state', this.state.appointment)
 
     return (
       <Wrapper>
@@ -114,7 +113,7 @@ class EditAppointmentPage extends Component {
               <TimePicker
                 onChange={this.handleTimeChange}
                 name="start_time"
-                format='hh:mm a'
+                format="hh:mm a"
                 value={this.state.appointment.start_time}
                 showSecond={showSecond}
                 use12Hours
@@ -133,13 +132,19 @@ class EditAppointmentPage extends Component {
               <TextArea onChange={this.handleChange} name="comments" type="text" value={this.state.appointment.comments} />
             </FormFieldDiv>
             <div>
-          <button>Update Appointment</button>
-        </div>
+              <button>Update Appointment</button>
+            </div>
           </FormContainer>
         </div>
       </Wrapper>
     )
   }
+}
+
+EditAppointmentPage.propTypes = {
+  match: PropTypes.oneOfType([
+    PropTypes.object,
+  ]).isRequired,
 }
 
 export default EditAppointmentPage
