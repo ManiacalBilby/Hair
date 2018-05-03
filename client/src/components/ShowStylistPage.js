@@ -1,6 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
+/* eslint-disable import/no-extraneous-dependencies */
+import PropTypes from 'prop-types'
+/* eslint-enable import/no-extraneous-dependencies */
 
 
 const Wrapper = styled.div`
@@ -39,9 +42,9 @@ const AppointmentContainer = styled.div`
     width: 600px;
   };
 `
-const ClientContainer = AppointmentContainer.extend`
-background-image: url('https://i.imgur.com/hoKEA4v.jpg?2');
-`
+// const ClientContainer = AppointmentContainer.extend`
+// background-image: url('https://i.imgur.com/hoKEA4v.jpg?2');
+// `
 
 const Content = styled.div`
   display: flex;
@@ -56,25 +59,27 @@ const StyledLink = styled(Link)`
 text-decoration: none;
 `
 
-class ShowStylistPage extends Component {
-  render() {
-    return (
-      <Wrapper>
-        <StyledLink to={`/stylists/${this.props.match.params.id}/appointments`}>
-          <AppointmentContainer>
-            <Content>
+const ShowStylistPage = ({ ...props }) => (
+  <Wrapper>
+    <StyledLink to={`/stylists/${props.match.params.id}/appointments`}>
+      <AppointmentContainer>
+        <Content>
               Appointments
-          </Content>
-          </AppointmentContainer>
-        </StyledLink>
-        {/* <ClientContainer>
+        </Content>
+      </AppointmentContainer>
+    </StyledLink>
+    {/* <ClientContainer>
           <Content>
             Clients
           </Content>
         </ClientContainer> */}
-      </Wrapper>
-    );
-  }
+  </Wrapper>
+)
+
+ShowStylistPage.propTypes = {
+  match: PropTypes.oneOfType([
+    PropTypes.object,
+  ]).isRequired,
 }
 
-export default ShowStylistPage;
+export default ShowStylistPage
