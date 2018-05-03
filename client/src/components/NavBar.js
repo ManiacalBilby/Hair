@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
@@ -25,21 +25,17 @@ const StyledLink = styled(Link)`
   color: black;
 `
 
-class NavBar extends Component {
-  render() {
-    return (
-      <StyledNavBar>
-        <StyledLink to="/">
-        <Logo>
+const NavBar = () => (
+  <StyledNavBar>
+    <StyledLink to="/">
+      <Logo>
           Hair
-        </Logo>
-        </StyledLink>
-        {/* <div>
+      </Logo>
+    </StyledLink>
+    {/* <div>
           <UserPic src="http://www.freeiconspng.com/uploads/profile-icon-9.png" alt="profile placeholder" />
         </div> */}
-      </StyledNavBar>
-    );
-  }
-}
+  </StyledNavBar>
+);
 
 export default NavBar;
