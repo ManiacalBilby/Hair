@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
@@ -50,19 +50,15 @@ const StylistLink = styled(Link)`
   };
 `
 
-class SplashPage extends Component {
-  render() {
-    return (
-      <Container>
-        <Content>
-          <SplashTitle>
-            <h1>Hair Appointment Integration Record</h1>
-          </SplashTitle>
-          <StylistLink to={"/stylists"}>Continue to existing users</StylistLink>
-        </Content>
-      </Container>
-    );
-  }
-}
+const SplashPage = () => (
+  <Container>
+    <Content>
+      <SplashTitle>
+        <h1>Hair Appointment Integration Record</h1>
+      </SplashTitle>
+      <StylistLink to="/stylists">Continue to existing users</StylistLink>
+    </Content>
+  </Container>
+)
 
-export default SplashPage;
+export default SplashPage
