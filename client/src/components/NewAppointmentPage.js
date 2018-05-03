@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import axios from 'axios'
-import { Redirect } from "react-router-dom"
+import { Redirect } from 'react-router-dom'
 import styled from 'styled-components'
 import moment from 'moment'
 import TimePicker from 'rc-time-picker'
 import 'rc-time-picker/assets/index.css'
+/* eslint-disable import/no-extraneous-dependencies */
+import PropTypes from 'prop-types'
+/* eslint-enable import/no-extraneous-dependencies */
 
 const showSecond = false
 
@@ -37,16 +40,15 @@ const TextArea = styled.textarea`
 `
 
 class NewAppointmentPage extends Component {
-
   state = {
     appointment: {
       start_time: moment(),
       start_date: moment(new Date()).format('DD MMM YYYY'),
       duration: 0,
       comments: '',
-      client_id: 1
+      client_id: 1,
     },
-    redirect: false
+    redirect: false,
   }
 
   handleChange = (event) => {
@@ -56,31 +58,30 @@ class NewAppointmentPage extends Component {
   }
 
   handleTimeChange = (value) => {
+    const appointmentTime = { ...this.state.appointment }
+    appointmentTime.start_time = value
 
-    const appointment_time = { ...this.state.appointment }
-    appointment_time.start_time = value
-
-    this.setState({ appointment: appointment_time })
-
+    this.setState({ appointment: appointmentTime })
   }
 
   handleNewAppointment = (event) => {
     event.preventDefault()
-    console.log(this.state.appointment)
+    // console.log(this.state.appointment)
     this.createAppointment(this.state.appointment)
   }
 
   createAppointment = async (newAppointment) => {
-    console.log('Params', this.props)
-    console.log('Converted time', moment(newAppointment.start_time, "hh:mm a").utc().format("hh:mm a"))
+    // console.log('Params', this.props)
+    /* console.log('Converted time',
+    moment(newAppointment.start_time, 'hh:mm a').utc().format('hh:mm a')) */
     await axios.post(`/api/stylists/${this.props.match.params.stylist_id}/appointments`, {
       appointment: {
-        start_time: moment(newAppointment.start_time, "hh:mm a").utc().format("hh:mm a"),
+        start_time: moment(newAppointment.start_time, 'hh:mm a').utc().format('hh:mm a'),
         start_date: newAppointment.start_date,
         duration: newAppointment.duration,
         comments: newAppointment.comments,
-        client_id: newAppointment.client_id
-      }
+        client_id: newAppointment.client_id,
+      },
     })
     this.setState({ redirect: true })
   }
@@ -101,12 +102,13 @@ class NewAppointmentPage extends Component {
               <TimePicker
                 onChange={this.handleTimeChange}
                 name="start_time"
-                format='hh:mm a'
+                format="hh:mm a"
                 value={this.state.appointment.start_time}
                 showSecond={showSecond}
                 use12Hours
               />
-              {/* <Input onChange={this.handleChange} name="start_time" type="text" value={this.state.appointment.start_time} /> */}
+              {/* <Input onChange={this.handleChange} name="start_time" type="text"
+              value={this.state.appointment.start_time} /> */}
             </FormFieldDiv>
             <FormFieldDiv>
               <label htmlFor="start_date">Date</label>
@@ -132,6 +134,12 @@ class NewAppointmentPage extends Component {
       </Wrapper>
     );
   }
+}
+
+NewAppointmentPage.propTypes = {
+  match: PropTypes.oneOfType([
+    PropTypes.object,
+  ]).isRequired,
 }
 
 export default NewAppointmentPage;
