@@ -1,6 +1,9 @@
-import React, { Component } from 'react';
-import { Link } from "react-router-dom"
+import React from 'react';
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
+/* eslint-disable import/no-extraneous-dependencies */
+import PropTypes from 'prop-types'
+/* eslint-enable import/no-extraneous-dependencies */
 
 const Wrapper = styled.div`
   display: flex;
@@ -36,31 +39,32 @@ const ProfileImage = styled.img`
   height: 225px;
   margin-bottom: 25px;
 `
-const ProfileLink = styled(Link) `
+const ProfileLink = styled(Link)`
   text-decoration: none;
   color: black;
   width: 250px;
   /* height: 275px; */
 `
 
-class StylistsPage extends Component {
-
-  render() {
-    return (
-      <Wrapper>
-        <AllStylistCards>
-          {this.props.stylists.map(stylist => (
-            <ProfileLink key={stylist.id} to={`/stylists/${stylist.id}/appointments`}>
-              <StylistCard>
-                <h2>{stylist.first_name} {stylist.last_name}</h2>
-                <ProfileImage src={stylist.photo_url} alt={stylist.first_name} />
-              </StylistCard>
-            </ProfileLink>
+const StylistsPage = ({ ...props }) => (
+  <Wrapper>
+    <AllStylistCards>
+      {props.stylists.map(stylist => (
+        <ProfileLink key={stylist.id} to={`/stylists/${stylist.id}/appointments`}>
+          <StylistCard>
+            <h2>{stylist.first_name} {stylist.last_name}</h2>
+            <ProfileImage src={stylist.photo_url} alt={stylist.first_name} />
+          </StylistCard>
+        </ProfileLink>
           ))}
-        </AllStylistCards>
-      </Wrapper>
-    );
-  }
+    </AllStylistCards>
+  </Wrapper>
+)
+
+StylistsPage.propTypes = {
+  stylists: PropTypes.oneOfType([
+    PropTypes.object,
+  ]).isRequired,
 }
 
 export default StylistsPage;
