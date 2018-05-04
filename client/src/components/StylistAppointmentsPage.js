@@ -3,6 +3,9 @@ import axios from 'axios'
 import { Link } from 'react-router-dom'
 import moment from 'moment'
 import styled from 'styled-components'
+/* eslint-disable import/no-extraneous-dependencies */
+import PropTypes from 'prop-types'
+/* eslint-enable import/no-extraneous-dependencies */
 
 const Wrapper = styled.div`
   height: 90vh;
@@ -53,33 +56,24 @@ const AppointmentContainer = styled.div`
 `
 
 class StylistAppointmentsPage extends Component {
-
   state = {
     stylist: {},
-    appointments: []
+    appointments: [],
   }
 
   componentWillMount = async () => {
     const stylist = await this.getStylist()
 
-    if (!!stylist) {
+    if (stylist) {
       const appointments = await this.fetchAppointments()
 
       await this.setState({ appointments, stylist })
     }
-
   }
 
   getStylist = () => {
-
-    const params_id = this.props.match.params.id
-
-    console.log("Confirm receiving stylists", this.props.stylists)
-    const stylist = this.props.stylists.find((sty) => {
-
-      return sty.id === parseInt(params_id, 10)
-    })
-    console.log("Current stylist", stylist)
+    const paramsId = this.props.match.params.id
+    const stylist = this.props.stylists.find(sty => sty.id === parseInt(paramsId, 10))
 
     return stylist;
   }
@@ -87,11 +81,11 @@ class StylistAppointmentsPage extends Component {
   fetchAppointments = async () => {
     try {
       const response = await axios.get(`/api/stylists/${this.props.match.params.id}/appointments`)
-      console.log("Api call should return all appts", response.data)
+
       return response.data
-    }
-    catch (error) {
-      console.log(error)
+    } catch (error) {
+      /* eslint no-console: ["error", { allow: ["warn", "error"] }] */
+      console.error(error)
       await this.setState({ error: error.message })
       return error.message
     }
@@ -99,50 +93,51 @@ class StylistAppointmentsPage extends Component {
 
   deleteAppointment = async (appointmentid) => {
     try {
-      console.log(appointmentid)
-      await axios.delete(`/api/stylists/${this.props.match.params.id}/appointments/` + appointmentid)
-      this.componentWillMount()
-      // // .then((res) => {
-      // console.log("Deleted!")
-      // const newappointments = [...this.state.appointments]
-      // const appointmentToDelete = this.state.appointments.indexOf(appointmentid)
-      // newappointments.splice(appointmentToDelete)
-      // this.setState({ appointments: newappointments })
-
+      // console.log(appointmentid)
+      await axios.delete(`/api/stylists/${this.props.match.params.id}/appointments/${appointmentid}`)
+      return this.componentWillMount()
+    } catch (error) {
+      // console.log(error)
+      await this.setState({ error: error.message })
+      return error.message
     }
-  catch(error) {
-    console.log(error)
-    await this.setState({ error: error.message })
-    return error.message
   }
-}
 
-render() {
-  if (this.state.error) {
-    return <div>{this.state.error}</div>
-  }
-  console.log("Stylist in state", this.state.stylist)
-  console.log("Appointments in state", this.state.appointments)
-  return (
-    <Wrapper>
-      <h1>{`${this.state.stylist.first_name}'s Appointments`}</h1>
+  render() {
+    if (this.state.error) {
+      return <div>{this.state.error}</div>
+    }
 
-      {this.state.appointments.map(appointment => (
-        <AllAppointmentsContainer key={appointment.id}>
-          <StyledLink to={`/stylists/${appointment.stylist_id}/appointments/${appointment.id}`}>
-            <AppointmentContainer key={appointment.id}>
-              <div>{`${appointment.duration} min.`}</div>
-              <div>{moment(appointment.start_date).format('MMM DD YYYY')}</div>
-              <div>{moment(appointment.start_time).add(1, 'h').format("LT")}</div>
-            </AppointmentContainer>
-          </StyledLink>
-          <button onClick={() => this.deleteAppointment(appointment.id)}>Delete</button>
-        </AllAppointmentsContainer>
+    return (
+      <Wrapper>
+        <h1>{`${this.state.stylist.first_name}'s Appointments`}</h1>
+
+        {this.state.appointments.map(appointment => (
+          <AllAppointmentsContainer key={appointment.id}>
+            <StyledLink to={`/stylists/${appointment.stylist_id}/appointments/${appointment.id}`}>
+              <AppointmentContainer key={appointment.id}>
+                <div>{`${appointment.duration} min.`}</div>
+                <div>{moment(appointment.start_date).format('MMM DD YYYY')}</div>
+                <div>{moment(appointment.start_time).add(1, 'h').format('LT')}</div>
+              </AppointmentContainer>
+            </StyledLink>
+            <button onClick={() => this.deleteAppointment(appointment.id)}>Delete</button>
+          </AllAppointmentsContainer>
       ))}
-      <StyledNewAppointmentLink to={`/stylists/${this.state.stylist.id}/appointments/new`}>Add New Appointment</StyledNewAppointmentLink>
-    </Wrapper>
-  );
+        <StyledNewAppointmentLink to={`/stylists/${this.state.stylist.id}/appointments/new`}>Add New Appointment</StyledNewAppointmentLink>
+      </Wrapper>
+    );
+  }
 }
+
+StylistAppointmentsPage.propTypes = {
+  match: PropTypes.oneOfType([
+    PropTypes.object,
+  ]).isRequired,
+
+  stylists: PropTypes.oneOfType([
+    PropTypes.object,
+  ]).isRequired,
 }
 
 export default StylistAppointmentsPage;
