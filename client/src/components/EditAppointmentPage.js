@@ -60,7 +60,6 @@ class EditAppointmentPage extends Component {
       const response = await axios.get(`/api/stylists/${this.props.match.params.stylist_id}/appointments/${this.props.match.params.id}`)
       return response.data
     } catch (error) {
-      /* eslint no-console: ["error", { allow: ["warn", "error"] }] */
       return console.error(error)
     }
   }
@@ -90,7 +89,6 @@ class EditAppointmentPage extends Component {
       await axios.patch(`/api/stylists/${this.props.match.params.stylist_id}/appointments/${this.props.match.params.id}`, payload)
       this.setState({ redirect: true })
     } catch (error) {
-      /* eslint no-console: ["error", { allow: ["warn", "error"] }] */
       console.error(error)
     }
   }
@@ -101,7 +99,6 @@ class EditAppointmentPage extends Component {
         <Redirect to={`/stylists/${this.props.match.params.stylist_id}/appointments`} />
       );
     }
-    // console.log('Appointment in state', this.state.appointment)
 
     return (
       <Wrapper>

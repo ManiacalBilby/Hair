@@ -26,5 +26,6 @@ module.exports = {
         "react/jsx-filename-extension": 0,
         "semi": 0,
         "jsx-a11y/anchor-is-valid": 0,
+        "no-console": ["error", { allow: ["warn", "error"] }],
     }
 };

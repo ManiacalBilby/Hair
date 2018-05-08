@@ -66,14 +66,10 @@ class NewAppointmentPage extends Component {
 
   handleNewAppointment = (event) => {
     event.preventDefault()
-    // console.log(this.state.appointment)
     this.createAppointment(this.state.appointment)
   }
 
   createAppointment = async (newAppointment) => {
-    // console.log('Params', this.props)
-    /* console.log('Converted time',
-    moment(newAppointment.start_time, 'hh:mm a').utc().format('hh:mm a')) */
     await axios.post(`/api/stylists/${this.props.match.params.stylist_id}/appointments`, {
       appointment: {
         start_time: moment(newAppointment.start_time, 'hh:mm a').utc().format('hh:mm a'),
@@ -107,8 +103,6 @@ class NewAppointmentPage extends Component {
                 showSecond={showSecond}
                 use12Hours
               />
-              {/* <Input onChange={this.handleChange} name="start_time" type="text"
-              value={this.state.appointment.start_time} /> */}
             </FormFieldDiv>
             <FormFieldDiv>
               <label htmlFor="start_date">Date</label>

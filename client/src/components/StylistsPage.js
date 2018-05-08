@@ -43,7 +43,6 @@ const ProfileLink = styled(Link)`
   text-decoration: none;
   color: black;
   width: 250px;
-  /* height: 275px; */
 `
 
 const StylistsPage = ({ ...props }) => (

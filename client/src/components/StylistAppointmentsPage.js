@@ -84,7 +84,6 @@ class StylistAppointmentsPage extends Component {
 
       return response.data
     } catch (error) {
-      /* eslint no-console: ["error", { allow: ["warn", "error"] }] */
       console.error(error)
       await this.setState({ error: error.message })
       return error.message
@@ -93,11 +92,9 @@ class StylistAppointmentsPage extends Component {
 
   deleteAppointment = async (appointmentid) => {
     try {
-      // console.log(appointmentid)
       await axios.delete(`/api/stylists/${this.props.match.params.id}/appointments/${appointmentid}`)
       return this.componentWillMount()
     } catch (error) {
-      // console.log(error)
       await this.setState({ error: error.message })
       return error.message
     }

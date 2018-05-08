@@ -32,7 +32,6 @@ const AppointmentContainer = styled.div`
   &:hover {
     box-shadow: 6px 9px 14px 10px rgba(201,197,201,1);
   };
-  /* background-attachment: fixed; */
   @media (min-width: 768px) {
     height: 300px;
     width: 500px;
