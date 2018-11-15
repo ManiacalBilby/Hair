@@ -5,6 +5,7 @@
   "proxy": "http://localhost:3001",
   "dependencies": {
     "axios": "^0.18.0",
+    "macaddress": "^0.2.9",
     "moment": "^2.21.0",
     "rc-time-picker": "^3.3.1",
     "react": "^16.2.0",
