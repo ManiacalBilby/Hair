@@ -72,7 +72,7 @@ class NewAppointmentPage extends Component {
   createAppointment = async (newAppointment) => {
     await axios.post(`/api/stylists/${this.props.match.params.stylist_id}/appointments`, {
       appointment: {
-        start_time: moment(newAppointment.start_time, 'hh:mm a').utc().format('hh:mm a'),
+        start_time: moment(newAppointment.start_time, 'hh:mm a').subtract(1, 'h').utc().format('hh:mm a'),
         start_date: newAppointment.start_date,
         duration: newAppointment.duration,
         comments: newAppointment.comments,
