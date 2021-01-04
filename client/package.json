@@ -4,7 +4,7 @@
   "private": true,
   "proxy": "http://localhost:3001",
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "macaddress": "^0.2.9",
     "moment": "^2.21.0",
     "rc-time-picker": "^3.3.1",
