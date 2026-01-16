@@ -4,8 +4,6 @@
 
 For my fourth and final project at General Assembly I chose to create a scheduling app for use by hairstylists(My amazing wife Amanda is one). Few solutions exist that also allow client information to be stored and easily retrieved
 
-[HAIR app](https://hair-scheduler.herokuapp.com/ "HAIR")
-
 ### Future improvements
 
 The following list are some objectives that I would like to work on next:
